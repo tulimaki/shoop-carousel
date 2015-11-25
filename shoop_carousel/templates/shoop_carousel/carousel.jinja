@@ -21,7 +21,7 @@
 
 {% if slides|length %}
 <div id="carousel-example-generic" class="carousel {{ carousel.animation_class_name }}" data-ride="carousel"
-     data-interval="{{ carousel.interval*1000 }}" {% if carousel.pause_on_hover %}data-pause="true"{% endif %}>
+     {% if carousel.pause_on_hover %}data-pause="hover"{% endif %} data-interval="{{ carousel.interval*1000 }}">
     {% if carousel.use_dot_navigation %}
         <ol class="carousel-indicators">
             {% for slide in slides %}

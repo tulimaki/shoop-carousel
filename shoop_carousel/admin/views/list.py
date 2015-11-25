@@ -20,8 +20,8 @@ class CarouselListView(PicotableListView):
         Column(
             "name",
             _("Name"),
-            sort_field="translations__name",
+            sort_field="name",
             display="name",
-            filter_config=TextFilter(filter_field="translations__name", placeholder=_("Filter by name..."))
+            filter_config=TextFilter(filter_field="name", placeholder=_("Filter by name..."))
         ),
     ]
