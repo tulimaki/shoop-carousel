@@ -80,7 +80,7 @@ class Slide(TranslatableShoopModel):
     translations = TranslatedFields(
         caption=models.CharField(verbose_name=_(u"caption"), max_length=80, blank=True, null=True),
         external_link=models.CharField(verbose_name=_(u"external link"), blank=True, null=True, max_length=160),
-        image=FilerImageField(verbose_name=_("image"), blank=True, null=True)
+        image=FilerImageField(verbose_name=_("image"), blank=True, null=True, on_delete=models.PROTECT)
     )
 
     def __str__(self):
