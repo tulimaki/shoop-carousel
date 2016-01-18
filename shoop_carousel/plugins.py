@@ -8,7 +8,10 @@
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from shoop.xtheme.plugins import TemplatedPlugin
+try:
+    from shoop.xtheme import TemplatedPlugin
+except ImportError:  # before Shoop 3.0
+    from shoop.xtheme.plugins import TemplatedPlugin
 from shoop.xtheme.resources import add_resource
 
 from shoop_carousel.models import Carousel
