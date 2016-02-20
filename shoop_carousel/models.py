@@ -57,8 +57,8 @@ class Carousel(ShoopModel):
         return self.name
 
     class Meta:
-        verbose_name = _(u"Carousel")
-        verbose_name_plural = _(u"Carousels")
+        verbose_name = _("Carousel")
+        verbose_name_plural = _("Carousels")
 
     @property
     def animation_class_name(self):
@@ -72,23 +72,24 @@ class Slide(TranslatableShoopModel):
         verbose_name=_(u"name"), max_length=50, blank=True, null=True,
         help_text=_("Name is only used to configure slides.")
     )
-    product_link = models.ForeignKey(Product, verbose_name=_(u"product link"), blank=True, null=True)
-    category_link = models.ForeignKey(Category, verbose_name=_(u"category link"), blank=True, null=True)
-    cms_page_link = models.ForeignKey(Page, verbose_name=_(u"cms page link"), blank=True, null=True)
-    ordering = models.IntegerField(verbose_name=_(u"ordering"), default=0, blank=True, null=True)
+    product_link = models.ForeignKey(Product, verbose_name=_("product link"), blank=True, null=True)
+    category_link = models.ForeignKey(Category, verbose_name=_("category link"), blank=True, null=True)
+    cms_page_link = models.ForeignKey(Page, verbose_name=_("cms page link"), blank=True, null=True)
+    ordering = models.IntegerField(verbose_name=_("ordering"), default=0, blank=True, null=True)
 
     translations = TranslatedFields(
-        caption=models.CharField(verbose_name=_(u"caption"), max_length=80, blank=True, null=True),
-        external_link=models.CharField(verbose_name=_(u"external link"), blank=True, null=True, max_length=160),
+        caption=models.CharField(verbose_name=_("caption"), max_length=80, blank=True, null=True),
+        caption_text=models.TextField(verbose_name=_("caption text"), blank=True, null=True),
+        external_link=models.CharField(verbose_name=_("external link"), blank=True, null=True, max_length=160),
         image=FilerImageField(verbose_name=_("image"), blank=True, null=True, on_delete=models.PROTECT)
     )
 
     def __str__(self):
-        return "%s %s" % (_(u"Slide"), self.pk)
+        return "%s %s" % (_("Slide"), self.pk)
 
     class Meta:
-        verbose_name = _(u"Slide")
-        verbose_name_plural = _(u"Slides")
+        verbose_name = _("Slide")
+        verbose_name_plural = _("Slides")
         ordering = ["ordering"]
 
     def get_translated_field(self, attr):
