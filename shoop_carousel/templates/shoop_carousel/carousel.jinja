@@ -8,6 +8,7 @@
         <img src="{{ cropped_slide }}" alt="...">
         <div class="carousel-caption">
             <h3>{{ slide.get_translated_field("caption") }}</h3>
+            <p>{{ slide.get_translated_field("caption_text") or "" }}</p>
         </div>
         {% if link %}</a>{% endif %}
     </div>
