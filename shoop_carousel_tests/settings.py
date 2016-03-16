@@ -17,7 +17,7 @@ INSTALLED_APPS = (
     "filer",
     "shoop.core",
     "shoop.front",
-    "shoop.simple_pricing",
+    "shoop.customer_group_pricing",
     "shoop.default_tax",
     "shoop.simple_cms",
     "shoop.xtheme",
