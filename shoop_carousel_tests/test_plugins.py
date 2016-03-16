@@ -23,7 +23,7 @@ def test_plugin_form():
 
 
 @pytest.mark.django_db
-def test_plugin_form():
+def test_plugin_form_get_context():
     context = get_jinja_context()
     test_carousel = Carousel.objects.create(name="test")
     plugin = CarouselPlugin(config={"carousel": test_carousel.pk})
