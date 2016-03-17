@@ -8,10 +8,13 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Q
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 from django.utils.translation import ugettext as _
 from enumfields import Enum, EnumIntegerField
 from filer.fields.image import FilerImageField
+from parler.managers import TranslatableQuerySet
 from parler.models import TranslatedFields
 from shoop.core.models._base import ShoopModel, TranslatableShoopModel
 from shoop.core.models import Category, Product
@@ -25,6 +28,34 @@ class CarouselMode(Enum):
     class Labels:
         SLIDE = _("Slide")
         FADE = _("Fade")
+
+
+class LinkTargetType(Enum):
+    CURRENT = 0
+    NEW = 1
+
+    class Labels:
+        CURRENT = _("Current")
+        FADE = _("New")
+
+
+class SlideQuerySet(TranslatableQuerySet):
+    def visible(self, dt=None):
+        """
+        Get slides that should be publicly visible.
+
+        This does not do permission checking.
+
+        :param dt: Datetime for visibility check
+        :type dt: datetime.datetime
+        :return: QuerySet of slides.
+        :rtype: QuerySet[Slide]
+        """
+        if not dt:
+            dt = now()
+        q = Q(available_from__lte=dt) & (Q(available_to__gte=dt) | Q(available_to__isnull=True))
+        qs = self.filter(q)
+        return qs
 
 
 @python_2_unicode_compatible
@@ -76,10 +107,28 @@ class Slide(TranslatableShoopModel):
     category_link = models.ForeignKey(Category, verbose_name=_("category link"), blank=True, null=True)
     cms_page_link = models.ForeignKey(Page, verbose_name=_("cms page link"), blank=True, null=True)
     ordering = models.IntegerField(verbose_name=_("ordering"), default=0, blank=True, null=True)
+    target = EnumIntegerField(
+        LinkTargetType, verbose_name=_("link target"), default=LinkTargetType.CURRENT,
+    )
+    available_from = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_('available from'),
+    )
+    available_to = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_('available to'),
+    )
 
     translations = TranslatedFields(
         caption=models.CharField(verbose_name=_("caption"), max_length=80, blank=True, null=True),
-        caption_text=models.TextField(verbose_name=_("caption text"), blank=True, null=True),
+        caption_text=models.TextField(
+            verbose_name=_("caption text"),
+            blank=True,
+            null=True,
+            help_text=_("When displayed in banner box mode, caption text is shown as a tooltip"),
+        ),
         external_link=models.CharField(verbose_name=_("external link"), blank=True, null=True, max_length=160),
         image=FilerImageField(verbose_name=_("image"), blank=True, null=True, on_delete=models.PROTECT)
     )
@@ -116,3 +165,36 @@ class Slide(TranslatableShoopModel):
             return reverse("shoop:category", kwargs=dict(pk=self.category_link.pk, slug=self.category_link.slug))
         elif self.cms_page_link:
             return reverse("shoop:cms_page", kwargs=dict(url=self.cms_page_link.url))
+
+    def is_visible(self, dt=None):
+        """
+        Get slides that should be publicly visible.
+
+        This does not do permission checking.
+
+        :param dt: Datetime for visibility check
+        :type dt: datetime.datetime
+        :return: Public visibility status
+        :rtype: bool
+        """
+        if not dt:
+            dt = now()
+
+        return (
+            (self.available_from and self.available_from <= dt) and
+            (self.available_to is None or self.available_to >= dt)
+        )
+
+    def get_link_target(self):
+        """
+        Return link target type string based on selection
+
+        :return: Target type string
+        :rtype: str
+        """
+        if self.target == LinkTargetType.NEW:
+            return "_blank"
+        else:
+            return "_self"
+
+    objects = SlideQuerySet.as_manager()

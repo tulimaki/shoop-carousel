@@ -12,7 +12,8 @@ class AppConfig(shoop.apps.AppConfig):
     name = __name__
     provides = {
         "admin_module": [__name__ + ".admin:CarouselModule"],
-        "xtheme_plugin": [__name__ + ".plugins:CarouselPlugin"]
+        "xtheme_plugin": [__name__ + ".plugins:CarouselPlugin",
+                          __name__ + ".plugins:BannerBoxPlugin"],
     }
 
 default_app_config = __name__ + ".AppConfig"

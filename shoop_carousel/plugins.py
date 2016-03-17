@@ -5,7 +5,6 @@
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
-from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 try:
@@ -15,31 +14,14 @@ except ImportError:  # before Shoop 3.0
 from shoop.xtheme.resources import add_resource
 
 from shoop_carousel.models import Carousel
-from shoop.xtheme.plugins.forms import GenericPluginForm
+from shoop.xtheme.plugins.forms import TranslatableField
 
-
-class CarouselConfigForm(GenericPluginForm):
-    def __init__(self, **kwargs):
-        super(CarouselConfigForm, self).__init__(**kwargs)
-
-    def populate(self):
-        self.fields["carousel"] = forms.ModelChoiceField(
-            label=_("Carousel"),
-            queryset=Carousel.objects.all(),
-            required=False,
-            initial=self.plugin.config.get("carousel") if self.plugin else None
-        )
-
-    def clean(self):
-        cleaned_data = super(CarouselConfigForm, self).clean()
-        carousel = cleaned_data.get("carousel")
-        cleaned_data["carousel"] = carousel.pk if hasattr(carousel, "pk") else None
-        return cleaned_data
+from .forms import BannerBoxConfigForm, CarouselConfigForm
 
 
 class CarouselPlugin(TemplatedPlugin):
     identifier = "shoop_carousel.product_highlight"
-    name = _("Carousel plugin")
+    name = _("Carousel Plugin")
     template_name = "shoop_carousel/carousel.jinja"
     fields = ["carousel"]
     editor_form_class = CarouselConfigForm
@@ -52,6 +34,7 @@ class CarouselPlugin(TemplatedPlugin):
         :return: html content for the plugin
         """
         add_resource(context, "head_end", "%sshoop_carousel/css/style.css" % settings.STATIC_URL)
+        add_resource(context, "body_end", "%sshoop_carousel/js/vendor/owl.carousel.min.js" % settings.STATIC_URL)
         return super(CarouselPlugin, self).render(context)
 
     def get_context_data(self, context):
@@ -67,3 +50,36 @@ class CarouselPlugin(TemplatedPlugin):
             "request": context["request"],
             "carousel": Carousel.objects.filter(id=carousel_id).first() if carousel_id else None,
         }
+
+
+class BannerBoxPlugin(CarouselPlugin):
+    identifier = "shoop_carousel.banner_box"
+    name = _("Banner Box")
+    template_name = "shoop_carousel/banner_box.jinja"
+    editor_form_class = BannerBoxConfigForm
+
+    fields = [
+        ("title", TranslatableField(label=_("Title"), required=False, initial="")),
+    ]
+
+    def render(self, context):
+        """
+        Custom render for to add js resource for banner box
+
+        :param context: current context
+        :return: html content for the plugin
+        """
+        add_resource(context, "body_end", "%sshoop_carousel/js/script.js" % settings.STATIC_URL)
+        return super(BannerBoxPlugin, self).render(context)
+
+    def get_context_data(self, context):
+        """
+        Add title from config to context data
+
+        :param context: Current context
+        :return: updated Plugin context
+        :rtype: dict
+        """
+        data = super(BannerBoxPlugin, self).get_context_data(context)
+        data["title"] = self.get_translated_value("title")
+        return data

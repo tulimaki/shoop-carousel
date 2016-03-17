@@ -9,11 +9,11 @@ import pytest
 from shoop_tests.front.fixtures import get_jinja_context
 
 from shoop_carousel.models import Carousel
-from shoop_carousel.plugins import CarouselPlugin
+from shoop_carousel.plugins import BannerBoxPlugin, CarouselPlugin
 
 
 @pytest.mark.django_db
-def test_plugin_form():
+def test_carousel_plugin_form():
     test_carousel = Carousel.objects.create(name="test")
     plugin = CarouselPlugin(config={})
     form_class = plugin.get_editor_form_class()
@@ -23,8 +23,18 @@ def test_plugin_form():
 
 
 @pytest.mark.django_db
-def test_plugin_form_get_context():
+def test_carousel_plugin_form_get_context():
     context = get_jinja_context()
     test_carousel = Carousel.objects.create(name="test")
     plugin = CarouselPlugin(config={"carousel": test_carousel.pk})
     assert plugin.get_context_data(context).get("carousel") == test_carousel
+
+
+@pytest.mark.django_db
+def test_banner_box_plugin():
+    context = get_jinja_context()
+    test_carousel = Carousel.objects.create(name="test")
+    plugin = BannerBoxPlugin(config={"carousel": test_carousel.pk, "title": "Test"})
+    data = plugin.get_context_data(context)
+    assert data.get("carousel") == test_carousel
+    assert data.get("title") == "Test"

@@ -45,3 +45,9 @@ To run tests, use command:
 .. code:: sh
 
    py.test -v shoop_carousel_tests
+
+Vendor plugins
+-------------
+
+Shoop Carousel uses the `Owl Carousel 2 <http://www.owlcarousel.owlgraphic.com/>`_
+jQuery slider plugin, which has been included in the ``js/vendor`` directory.

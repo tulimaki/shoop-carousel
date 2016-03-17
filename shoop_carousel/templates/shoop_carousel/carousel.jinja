@@ -4,7 +4,7 @@
         {% set translated_image = slide.get_translated_field("image") %}
         {% set cropped_slide = translated_image|thumbnail(size=(carousel.image_width, carousel.image_height), crop="smart", upscale=True) %}
 
-        {% if link %}<a href="{{ link }}">{% endif %}
+        {% if link %}<a href="{{ link }}" target="{{ slide.get_link_target() }}">{% endif %}
         <img src="{{ cropped_slide }}" alt="...">
         <div class="carousel-caption">
             <h3>{{ slide.get_translated_field("caption") }}</h3>
@@ -15,7 +15,7 @@
 {% endmacro %}
 
 {% if carousel %}
-    {% set slides = carousel.slides.all() %}
+    {% set slides = carousel.slides.visible() %}
 {% else %}
     {% set slides = [] %}
 {% endif %}
