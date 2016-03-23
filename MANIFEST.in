@@ -1,4 +1,4 @@
 include README.rst
 include LICENSE
 
-recursive-include shoop_carousel *.css *.jinja
+recursive-include shoop_carousel *.css *.jinja *.js
