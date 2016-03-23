@@ -5,7 +5,7 @@
 {% endif %}
 
 {% if slides|length %}
-<section class="carousel-section">
+<section class="carousel-banner-section">
     <div class="title-bar light">
         <h2>{{ title }}</h2>
     </div>
@@ -15,11 +15,10 @@
             {% set translated_image = slide.get_translated_field("image") %}
             {% set cropped_slide = translated_image|thumbnail(size=(carousel.image_width, carousel.image_height), crop="smart", upscale=True) %}
             {% set caption_text = slide.get_translated_field("caption_text") or "" %}
-            <a href="{{ link }}" target="{{ slide.get_link_target() }}" class="col-inner" data-toggle="tooltip" title="{{ caption_text }}">
+            {% if link %}<a href="{{ link }}" target="{{ slide.get_link_target() }}" class="col-inner" data-toggle="tooltip" title="{{ caption_text }}">{% endif %}
                 <img src="{{ cropped_slide }}" alt="{{ caption_text }}">
-            </a>
+            {% if link %}</a>{% endif %}
         {% endfor %}
-        </a>
     </div>
 </section>
 {% endif %}

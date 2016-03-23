@@ -45,3 +45,9 @@
 .owl-carousel .fa-angle-right {
     right: -25px;
 }
+
+.carousel-banner-section {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding: 0 30px;
+}
