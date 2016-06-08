@@ -5,11 +5,12 @@
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
-from django import forms
+
 from django.utils.translation import ugettext_lazy as _
 
 from shoop_carousel.models import Carousel
 from shoop.xtheme.plugins.forms import GenericPluginForm
+from shoop.xtheme.plugins.widgets import XThemeModelChoiceField
 
 
 class CarouselConfigForm(GenericPluginForm):
@@ -17,7 +18,7 @@ class CarouselConfigForm(GenericPluginForm):
         super(CarouselConfigForm, self).__init__(**kwargs)
 
     def populate(self):
-        self.fields["carousel"] = forms.ModelChoiceField(
+        self.fields["carousel"] = XThemeModelChoiceField(
             label=_("Carousel"),
             queryset=Carousel.objects.all(),
             required=False,
@@ -37,7 +38,7 @@ class BannerBoxConfigForm(GenericPluginForm):
 
     def populate(self):
         super(BannerBoxConfigForm, self).populate()
-        self.fields["carousel"] = forms.ModelChoiceField(
+        self.fields["carousel"] = XThemeModelChoiceField(
             label=_("Carousel"),
             queryset=Carousel.objects.all(),
             required=False,
