@@ -23,10 +23,10 @@
 {% if slides_form.carousel.pk %}
     {% call content_block(_("Slides"), "fa-image") %}
         <p class="text-muted small">
-            {% trans %}
+            {% trans -%}
             Only image for default language is required.
             If external link is not set link will fallback to product link, category link or cms page link in this order.
-            {% endtrans %}
+            {%- endtrans %}
         </p>
         <a class="btn btn-lg btn-text slide-add-new-panel" href="#" data-target-id="id_slides" data-target-panels="slides-section">+ {% trans %}Add new slide{% endtrans %}</a>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
