@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(help_text='Name is only used to configure carousels.', max_length=50, verbose_name='name')),
                 ('animation', enumfields.fields.EnumIntegerField(default=0, help_text='Animation type for cycling slides.', enum=shoop_carousel.models.CarouselMode, verbose_name='animation')),
                 ('interval', models.IntegerField(default=5, help_text='Slide interval in seconds.', verbose_name='interval')),
-                ('pause_on_hover', models.BooleanField(default=True, help_text='Pauses the cycling of the carousel on mouse over.')),
+                ('pause_on_hover', models.BooleanField(verbose_name='pause on hover', default=True, help_text='Pauses the cycling of the carousel on mouse over.')),
                 ('is_arrows_visible', models.BooleanField(default=True, verbose_name='show navigation arrows')),
                 ('use_dot_navigation', models.BooleanField(default=True, verbose_name='show navigation dots')),
                 ('image_width', models.IntegerField(default=1200, help_text='Slide images will be cropped to this width.', verbose_name='image width')),
