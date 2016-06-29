@@ -71,6 +71,7 @@ class Carousel(ShoopModel):
         verbose_name=_(u"interval"), default=5, help_text=_("Slide interval in seconds.")
     )
     pause_on_hover = models.BooleanField(
+        verbose_name=_(u"pause on hover"),
         default=True, help_text=_("Pauses the cycling of the carousel on mouse over.")
     )
     is_arrows_visible = models.BooleanField(verbose_name=_("show navigation arrows"), default=True)
