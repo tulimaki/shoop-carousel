@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
@@ -9,12 +9,12 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.db.transaction import atomic
-from shoop.admin.form_part import FormPart, FormPartsViewMixin, SaveFormPartsMixin, TemplatedFormDef
-from shoop.admin.utils.views import CreateOrUpdateView
-from shoop.admin.toolbar import get_default_edit_toolbar
+from shuup.admin.form_part import FormPart, FormPartsViewMixin, SaveFormPartsMixin, TemplatedFormDef
+from shuup.admin.utils.views import CreateOrUpdateView
+from shuup.admin.toolbar import get_default_edit_toolbar
 
-from shoop_carousel.admin.forms import CarouselForm, SlideFormSet
-from shoop_carousel.models import Carousel
+from shuup_carousel.admin.forms import CarouselForm, SlideFormSet
+from shuup_carousel.models import Carousel
 
 
 class CarouselFormPart(FormPart):
@@ -26,7 +26,7 @@ class CarouselFormPart(FormPart):
         yield TemplatedFormDef(
             self.name,
             self.form,
-            template_name="shoop_carousel/admin/_edit_base_form.jinja",
+            template_name="shuup_carousel/admin/_edit_base_form.jinja",
             required=True,
             kwargs={
                 "instance": self.object,
@@ -47,7 +47,7 @@ class SlideFormPart(FormPart):
         yield TemplatedFormDef(
             self.name,
             self.formset,
-            template_name="shoop_carousel/admin/_edit_slide_form.jinja",
+            template_name="shuup_carousel/admin/_edit_slide_form.jinja",
             required=False,
             kwargs={"carousel": self.object, "languages": settings.LANGUAGES}
         )
@@ -59,7 +59,7 @@ class SlideFormPart(FormPart):
 
 class CarouselEditView(FormPartsViewMixin, SaveFormPartsMixin, CreateOrUpdateView):
     model = Carousel
-    template_name = "shoop_carousel/admin/edit.jinja"
+    template_name = "shuup_carousel/admin/edit.jinja"
     base_form_part_classes = [
         CarouselFormPart,
         SlideFormPart,
@@ -70,7 +70,7 @@ class CarouselEditView(FormPartsViewMixin, SaveFormPartsMixin, CreateOrUpdateVie
     def get_toolbar(self):
         save_form_id = self.get_save_form_id()
         if save_form_id:
-            return get_default_edit_toolbar(self, save_form_id, delete_url="shoop_admin:carousel.delete")
+            return get_default_edit_toolbar(self, save_form_id, delete_url="shuup_admin:carousel.delete")
 
     @atomic
     def form_valid(self, form):

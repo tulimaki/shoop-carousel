@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
-from shoop.admin.utils.picotable import Column, TextFilter
-from shoop.admin.utils.views import PicotableListView
+from shuup.admin.utils.picotable import Column, TextFilter
+from shuup.admin.utils.views import PicotableListView
 
-from shoop_carousel.models import Carousel
+from shuup_carousel.models import Carousel
 
 
 class CarouselListView(PicotableListView):

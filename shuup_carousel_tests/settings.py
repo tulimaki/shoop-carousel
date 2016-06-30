@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 import os
@@ -15,13 +15,13 @@ INSTALLED_APPS = (
     "django.contrib.contenttypes",
     "easy_thumbnails",
     "filer",
-    "shoop.core",
-    "shoop.front",
-    "shoop.customer_group_pricing",
-    "shoop.default_tax",
-    "shoop.simple_cms",
-    "shoop.xtheme",
-    "shoop_carousel",
+    "shuup.core",
+    "shuup.front",
+    "shuup.customer_group_pricing",
+    "shuup.default_tax",
+    "shuup.simple_cms",
+    "shuup.xtheme",
+    "shuup_carousel",
 )
 
 DATABASES = {
@@ -29,7 +29,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(
             tempfile.gettempdir(),
-            'shoop_stripe_tests.sqlite3'
+            'shuup_stripe_tests.sqlite3'
         ),
     }
 }
@@ -48,7 +48,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "var", "media")
 
 STATIC_URL = "static/"
 
-ROOT_URLCONF = 'shoop_workbench.urls'
+ROOT_URLCONF = 'shuup_workbench.urls'
 
 LANGUAGES = [
     ('en', 'English'),

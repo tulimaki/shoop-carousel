@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
-import shoop.apps
+import shuup.apps
 
 
-class AppConfig(shoop.apps.AppConfig):
+class AppConfig(shuup.apps.AppConfig):
     name = __name__
     provides = {
         "admin_module": [__name__ + ".admin:CarouselModule"],

@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shoop_carousel', '0002_protect_image'),
+        ('shuup_carousel', '0002_protect_image'),
     ]
 
     operations = [

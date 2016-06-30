@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 import pytest
 
-from shoop_tests.front.fixtures import get_jinja_context
+from shuup_tests.front.fixtures import get_jinja_context
 
-from shoop_carousel.models import Carousel
-from shoop_carousel.plugins import BannerBoxPlugin, CarouselPlugin
+from shuup_carousel.models import Carousel
+from shuup_carousel.plugins import BannerBoxPlugin, CarouselPlugin
 
 
 @pytest.mark.django_db

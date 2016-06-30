@@ -1,21 +1,21 @@
 import setuptools
 
 try:
-    import shoop_setup_utils
+    import shuup_setup_utils
 except ImportError:
-    shoop_setup_utils = None
+    shuup_setup_utils = None
 
 
 if __name__ == '__main__':
     setuptools.setup(
-        name="shoop-carousel",
-        version="1.0.9",
-        description="Shoop Carousel",
+        name="shuup-carousel",
+        version="1.1.0",
+        description="Shuup Carousel",
         packages=setuptools.find_packages(),
         include_package_data=True,
-        entry_points={"shoop.addon": "shoop_carousel=shoop_carousel"},
-        cmdclass=(shoop_setup_utils.COMMANDS if shoop_setup_utils else {}),
+        entry_points={"shuup.addon": "shuup_carousel=shuup_carousel"},
+        cmdclass=(shuup_setup_utils.COMMANDS if shuup_setup_utils else {}),
         install_requires=[
-            'shoop>=3.0,<5',
+            'shuup>=0.4',
         ],
     )

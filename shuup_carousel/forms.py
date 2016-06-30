@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
 
 from django.utils.translation import ugettext_lazy as _
 
-from shoop_carousel.models import Carousel
-from shoop.xtheme.plugins.forms import GenericPluginForm
-from shoop.xtheme.plugins.widgets import XThemeModelChoiceField
+from shuup_carousel.models import Carousel
+from shuup.xtheme.plugins.forms import GenericPluginForm
+from shuup.xtheme.plugins.widgets import XThemeModelChoiceField
 
 
 class CarouselConfigForm(GenericPluginForm):

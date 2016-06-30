@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
@@ -16,9 +16,9 @@ from enumfields import Enum, EnumIntegerField
 from filer.fields.image import FilerImageField
 from parler.managers import TranslatableQuerySet
 from parler.models import TranslatedFields
-from shoop.core.models._base import ShoopModel, TranslatableShoopModel
-from shoop.core.models import Category, Product
-from shoop.simple_cms.models import Page
+from shuup.core.models._base import ShuupModel, TranslatableShuupModel
+from shuup.core.models import Category, Product
+from shuup.simple_cms.models import Page
 
 
 class CarouselMode(Enum):
@@ -59,7 +59,7 @@ class SlideQuerySet(TranslatableQuerySet):
 
 
 @python_2_unicode_compatible
-class Carousel(ShoopModel):
+class Carousel(ShuupModel):
     name = models.CharField(
         verbose_name=_(u"name"), max_length=50, help_text=_("Name is only used to configure carousels.")
     )
@@ -98,7 +98,7 @@ class Carousel(ShoopModel):
 
 
 @python_2_unicode_compatible
-class Slide(TranslatableShoopModel):
+class Slide(TranslatableShuupModel):
     carousel = models.ForeignKey(Carousel, related_name="slides", on_delete=models.CASCADE)
     name = models.CharField(
         verbose_name=_(u"name"), max_length=50, blank=True, null=True,
@@ -161,11 +161,11 @@ class Slide(TranslatableShoopModel):
         if external_link:
             return external_link
         elif self.product_link:
-            return reverse("shoop:product", kwargs=dict(pk=self.product_link.pk, slug=self.product_link.slug))
+            return reverse("shuup:product", kwargs=dict(pk=self.product_link.pk, slug=self.product_link.slug))
         elif self.category_link:
-            return reverse("shoop:category", kwargs=dict(pk=self.category_link.pk, slug=self.category_link.slug))
+            return reverse("shuup:category", kwargs=dict(pk=self.category_link.pk, slug=self.category_link.slug))
         elif self.cms_page_link:
-            return reverse("shoop:cms_page", kwargs=dict(url=self.cms_page_link.url))
+            return reverse("shuup:cms_page", kwargs=dict(url=self.cms_page_link.url))
 
     def is_visible(self, dt=None):
         """
