@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import enumfields.fields
-import shoop_carousel.models
+import shuup_carousel.models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shoop_carousel', '0003_add_caption_text'),
+        ('shuup_carousel', '0003_add_caption_text'),
     ]
 
     operations = [
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='slide',
             name='target',
-            field=enumfields.fields.EnumIntegerField(default=0, enum=shoop_carousel.models.LinkTargetType, verbose_name='link target'),
+            field=enumfields.fields.EnumIntegerField(default=0, enum=shuup_carousel.models.LinkTargetType, verbose_name='link target'),
         ),
         migrations.AlterField(
             model_name='slidetranslation',

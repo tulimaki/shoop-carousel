@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 from datetime import datetime, timedelta
@@ -10,9 +10,9 @@ import pytest
 from django.utils import translation
 from filer.models import Image
 
-from shoop.testing.factories import get_default_category, get_default_product
-from shoop_carousel.models import Carousel, LinkTargetType, Slide
-from shoop_tests.simple_cms.utils import create_page
+from shuup.testing.factories import get_default_category, get_default_product
+from shuup_carousel.models import Carousel, LinkTargetType, Slide
+from shuup_tests.simple_cms.utils import create_page
 
 
 @pytest.mark.django_db

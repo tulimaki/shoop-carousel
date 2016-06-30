@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
@@ -12,9 +12,9 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
-from shoop.admin.utils.urls import get_model_url
+from shuup.admin.utils.urls import get_model_url
 
-from shoop_carousel.models import Carousel
+from shuup_carousel.models import Carousel
 
 
 class CarouselDeleteView(DetailView):
@@ -29,4 +29,4 @@ class CarouselDeleteView(DetailView):
         name = carousel.name
         carousel.delete()
         messages.success(request, _(u"%s has been deleted.") % name)
-        return HttpResponseRedirect(reverse("shoop_admin:carousel.list"))
+        return HttpResponseRedirect(reverse("shuup_admin:carousel.list"))

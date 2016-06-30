@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is part of Shoop Carousel.
+# This file is part of Shuup Carousel.
 #
-# Copyright (c) 2012-2015, Shoop Ltd. All rights reserved.
+# Copyright (c) 2012-2015, Shuup Ltd. All rights reserved.
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
@@ -9,10 +9,10 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.forms import ModelForm, BaseModelFormSet
-from shoop.admin.forms.widgets import ImageChoiceWidget, ProductChoiceWidget
-from shoop.utils.multilanguage_model_form import MultiLanguageModelForm, to_language_codes
+from shuup.admin.forms.widgets import ImageChoiceWidget, ProductChoiceWidget
+from shuup.utils.multilanguage_model_form import MultiLanguageModelForm, to_language_codes
 
-from shoop_carousel.models import Carousel, Slide
+from shuup_carousel.models import Carousel, Slide
 
 
 class CarouselForm(ModelForm):
