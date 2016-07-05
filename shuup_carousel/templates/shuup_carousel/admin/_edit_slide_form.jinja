@@ -6,8 +6,10 @@
     <div class="panel panel-default panel-slide">
         <div class="panel-heading" role="tab" id="heading{{ idx }}">
             <a class="panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ idx }}" aria-expanded="true" aria-controls="collapse{{ idx }}">
-
-                {% trans %}Slide{% endtrans %} {%  if f.instance.name %}{{ idx }} {{ f.instance.name }}{% else %}{{ idx }}{% endif %} <i class="fa fa-angle-down pull-right"></i>
+                <span class="title">
+                {% trans %}Slide{% endtrans %} {%  if f.instance.name %}{{ idx }} {{ f.instance.name }}{% else %}{{ idx }}{% endif %}
+                </span>
+                <i class="fa fa-angle-down pull-right"></i>
             </a>
         </div>
         <div id="collapse{{ idx }}" class="panel-collapse collapse{% if  idx == "__prefix__" or f.errors %} in{% endif %}" role="tabpanel" aria-labelledby="heading{{ idx }}">
