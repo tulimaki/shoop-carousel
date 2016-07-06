@@ -64,7 +64,7 @@ class SlideFormSet(BaseModelFormSet):
         super(SlideFormSet, self).__init__(*args, **kwargs)
 
     def get_queryset(self):
-        return Slide.objects.filter(carousel=self.carousel).order_by("ordering")
+        return Slide.objects.filter(carousel=self.carousel)
 
     def form(self, **kwargs):
         kwargs.setdefault("carousel", self.carousel)

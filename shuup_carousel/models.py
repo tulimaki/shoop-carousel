@@ -140,7 +140,7 @@ class Slide(TranslatableShuupModel):
     class Meta:
         verbose_name = _("Slide")
         verbose_name_plural = _("Slides")
-        ordering = ["ordering"]
+        ordering = ("ordering", "id")
 
     def get_translated_field(self, attr):
         if not self.safe_translation_getter(attr):
