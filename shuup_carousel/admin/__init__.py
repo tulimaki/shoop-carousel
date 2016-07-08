@@ -7,9 +7,14 @@
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
-from shuup.admin.base import AdminModule, MenuEntry
-from shuup.admin.utils.urls import derive_model_url, admin_url, get_edit_and_list_urls
+from filer.models import File
 
+from shuup.admin.base import AdminModule, MenuEntry
+from shuup.admin.utils.permissions import get_default_model_permissions
+from shuup.admin.utils.urls import (
+    admin_url, derive_model_url, get_edit_and_list_urls
+)
+from shuup.core.models import Product
 from shuup_carousel.models import Carousel
 
 
@@ -42,6 +47,13 @@ class CarouselModule(AdminModule):
                 category=self.name
             )
         ]
+
+    def get_required_permissions(self):
+        return (
+            get_default_model_permissions(Carousel) |
+            get_default_model_permissions(File) |
+            get_default_model_permissions(Product)
+        )
 
     def get_model_url(self, object, kind):
         return derive_model_url(Carousel, "shuup_admin:carousel", object, kind)
