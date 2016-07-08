@@ -8,10 +8,12 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.forms import ModelForm, BaseModelFormSet
-from shuup.admin.forms.widgets import ImageChoiceWidget, ProductChoiceWidget
-from shuup.utils.multilanguage_model_form import MultiLanguageModelForm, to_language_codes
+from django.forms import BaseModelFormSet, ModelForm
 
+from shuup.admin.forms.widgets import ImageChoiceWidget, ProductChoiceWidget
+from shuup.utils.multilanguage_model_form import (
+    MultiLanguageModelForm, to_language_codes
+)
 from shuup_carousel.models import Carousel, Slide
 
 

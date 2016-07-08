@@ -7,16 +7,19 @@
 # LICENSE file in the root directory of this source tree.
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+
+from shuup.xtheme.plugins.forms import TranslatableField
+from shuup.xtheme.resources import add_resource
+from shuup_carousel.models import Carousel
+
+from .forms import BannerBoxConfigForm, CarouselConfigForm
+
 try:
     from shuup.xtheme import TemplatedPlugin
 except ImportError:  # before Shuup 3.0
     from shuup.xtheme.plugins import TemplatedPlugin
-from shuup.xtheme.resources import add_resource
 
-from shuup_carousel.models import Carousel
-from shuup.xtheme.plugins.forms import TranslatableField
 
-from .forms import BannerBoxConfigForm, CarouselConfigForm
 
 
 class CarouselPlugin(TemplatedPlugin):

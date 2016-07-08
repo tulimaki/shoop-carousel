@@ -6,10 +6,9 @@
 # This source code is licensed under the AGPLv3 license found in the
 import pytest
 
-from shuup_tests.front.fixtures import get_jinja_context
-
 from shuup_carousel.models import Carousel
 from shuup_carousel.plugins import BannerBoxPlugin, CarouselPlugin
+from shuup_tests.front.fixtures import get_jinja_context
 
 
 @pytest.mark.django_db

@@ -8,9 +8,9 @@
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
+
 from shuup.admin.utils.picotable import Column, TextFilter
 from shuup.admin.utils.views import PicotableListView
-
 from shuup_carousel.models import Carousel
 
 

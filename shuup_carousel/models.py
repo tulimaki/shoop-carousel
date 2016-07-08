@@ -16,8 +16,9 @@ from enumfields import Enum, EnumIntegerField
 from filer.fields.image import FilerImageField
 from parler.managers import TranslatableQuerySet
 from parler.models import TranslatedFields
-from shuup.core.models._base import ShuupModel, TranslatableShuupModel
+
 from shuup.core.models import Category, Product
+from shuup.core.models._base import ShuupModel, TranslatableShuupModel
 from shuup.simple_cms.models import Page
 
 
