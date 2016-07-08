@@ -12,8 +12,8 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
-from shuup.admin.utils.urls import get_model_url
 
+from shuup.admin.utils.urls import get_model_url
 from shuup_carousel.models import Carousel
 
 

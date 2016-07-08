@@ -8,9 +8,9 @@
 
 from django.utils.translation import ugettext_lazy as _
 
-from shuup_carousel.models import Carousel
 from shuup.xtheme.plugins.forms import GenericPluginForm
 from shuup.xtheme.plugins.widgets import XThemeModelChoiceField
+from shuup_carousel.models import Carousel
 
 
 class CarouselConfigForm(GenericPluginForm):

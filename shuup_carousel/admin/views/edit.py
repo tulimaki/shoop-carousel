@@ -9,10 +9,12 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.db.transaction import atomic
-from shuup.admin.form_part import FormPart, FormPartsViewMixin, SaveFormPartsMixin, TemplatedFormDef
-from shuup.admin.utils.views import CreateOrUpdateView
-from shuup.admin.toolbar import get_default_edit_toolbar
 
+from shuup.admin.form_part import (
+    FormPart, FormPartsViewMixin, SaveFormPartsMixin, TemplatedFormDef
+)
+from shuup.admin.toolbar import get_default_edit_toolbar
+from shuup.admin.utils.views import CreateOrUpdateView
 from shuup_carousel.admin.forms import CarouselForm, SlideFormSet
 from shuup_carousel.models import Carousel
 
