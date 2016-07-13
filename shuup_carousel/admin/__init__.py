@@ -26,12 +26,14 @@ class CarouselModule(AdminModule):
         return get_edit_and_list_urls(
             url_prefix="^carousels",
             view_template="shuup_carousel.admin.views.Carousel%sView",
-            name_template="carousel.%s"
+            name_template="carousel.%s",
+            permissions=get_default_model_permissions(Carousel)
         ) + [
             admin_url(
                 "^carousel/(?P<pk>\d+)/delete/$",
                 "shuup_carousel.admin.views.CarouselDeleteView",
-                name="carousel.delete"
+                name="carousel.delete",
+                permissions=get_default_model_permissions(Carousel)
             ),
         ]
 
