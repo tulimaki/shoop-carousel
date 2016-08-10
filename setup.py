@@ -9,7 +9,7 @@ except ImportError:
 if __name__ == '__main__':
     setuptools.setup(
         name="shuup-carousel",
-        version="1.5.6",
+        version="1.5.7",
         description="Shuup Carousel",
         packages=setuptools.find_packages(),
         include_package_data=True,
