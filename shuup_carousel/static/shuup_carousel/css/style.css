@@ -1,35 +1,3 @@
-.carousel {
-    margin-bottom: 20px;
-}
-
-.carousel.fade {
-    opacity: 1;
-}
-
-.carousel.fade .item {
-    display: block !important;
-    position: absolute;
-    left: 0 !important;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-}
-
-.carousel.fade .item:first-child {
-    position: relative;
-    top: auto;
-}
-
-.carousel.fade .item.active {
-    height: 100%;
-    z-index: 2;
-    opacity: 1;
-    transition: opacity 0.6s ease-in-out;
-}
-
 .owl-carousel .fa {
     font-size: 30px;
     z-index: 10;
@@ -38,8 +6,17 @@
     margin-top: -15px;
 }
 
+.owl-carousel.one .fa-angle-left {
+    left: 40px;
+}
+
 .owl-carousel .fa-angle-left {
     left: -25px;
+    z-index: 1000;
+}
+
+.owl-carousel.one .fa-angle-right {
+    right: 40px;
 }
 
 .owl-carousel .fa-angle-right {
@@ -50,4 +27,33 @@
     margin-top: 30px;
     margin-bottom: 15px;
     padding: 0 30px;
+}
+
+.owl-carousel.one .owl-dots {
+    position: absolute;
+    bottom: 0 !important;
+    left: 50%;
+    z-index: 15;
+    width: 60%;
+    margin-left: -30%;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.owl-carousel.one .owl-dot {
+    background: transparent;
+    border-radius: 10px;
+    border: 1px solid #6f6f6f;
+    display: inline-block;
+    height: 10px;
+    margin: 1px;
+    width: 10px;
+}
+
+.owl-carousel.one .owl-dot.active {
+    margin: 0;
+    width:  12px;
+    height: 12px;
+    background-color: #6f6f6f;
 }

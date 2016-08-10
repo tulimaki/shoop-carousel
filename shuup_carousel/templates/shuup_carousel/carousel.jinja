@@ -1,19 +1,3 @@
-{% macro render_slide(slide, slide_idx) %}
-    <div class="item{% if slide_idx == 1 %} active{% endif %}">
-        {% set link = slide.get_link_url() %}
-        {% set translated_image = slide.get_translated_field("image") %}
-        {% set cropped_slide = translated_image|thumbnail(size=(carousel.image_width, carousel.image_height), crop="smart", upscale=True) %}
-
-        {% if link %}<a href="{{ link }}" target="{{ slide.get_link_target() }}">{% endif %}
-        <img src="{{ cropped_slide }}" alt="...">
-        <div class="carousel-caption">
-            <h3>{{ slide.get_translated_field("caption") }}</h3>
-            <p>{{ slide.get_translated_field("caption_text") or "" }}</p>
-        </div>
-        {% if link %}</a>{% endif %}
-    </div>
-{% endmacro %}
-
 {% if carousel %}
     {% set slides = carousel.slides.visible() %}
 {% else %}
@@ -21,30 +5,21 @@
 {% endif %}
 
 {% if slides|length %}
-<div id="carousel-example-generic" class="carousel {{ carousel.animation_class_name }}" data-ride="carousel"
-     {% if carousel.pause_on_hover %}data-pause="hover"{% endif %} data-interval="{{ carousel.interval*1000 }}">
-    {% if carousel.use_dot_navigation %}
-        <ol class="carousel-indicators">
-            {% for slide in slides %}
-                <li data-target="#carousel-example-generic" data-slide-to="{{ loop.index0 }}"
-                    class="{% if loop.index0 == 0 %}active{% endif %}"></li>
-            {% endfor %}
-        </ol>
-    {% endif %}
-    <div class="carousel-inner" role="listbox">
-        {% for slide in slides %}
-            {{ render_slide(slide, loop.index) }}
-        {% endfor %}
-    </div>
-    {% if carousel.is_arrows_visible %}
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">{% trans %}Previous{% endtrans %}</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">{% trans %}Next{% endtrans %}</span>
-        </a>
-    {% endif %}
+<div
+    class="owl-carousel one"
+    data-autoplay="{% if carousel.interval > 0 %}true{% else %}false{% endif %}"
+    data-interval="{{ carousel.interval * 1000 }}"
+    data-arrows-visible="{{ carousel.is_arrows_visible }}"
+    data-pause-on-hover="{{ carousel.pause_on_hover }}"
+    data-use-dot-navigation="{{ carousel.use_dot_navigation }}">
+    {% for slide in slides %}
+        {% set link = slide.get_link_url() %}
+        {% set translated_image = slide.get_translated_field("image") %}
+        {% set cropped_slide = translated_image|thumbnail(size=(carousel.image_width, carousel.image_height), crop="smart", upscale=True) %}
+        {% set caption_text = slide.get_translated_field("caption_text") or "" %}
+        {% if link %}<a href="{{ link }}" target="{{ slide.get_link_target() }}" class="col-inner" data-toggle="tooltip" title="{{ caption_text }}">{% endif %}
+            <img src="{{ cropped_slide }}" alt="{{ caption_text }}">
+        {% if link %}</a>{% endif %}
+    {% endfor %}
 </div>
 {% endif %}

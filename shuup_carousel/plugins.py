@@ -37,6 +37,7 @@ class CarouselPlugin(TemplatedPlugin):
         :return: html content for the plugin
         """
         add_resource(context, "head_end", "%sshuup_carousel/css/style.css" % settings.STATIC_URL)
+        add_resource(context, "body_end", "%sshuup_carousel/js/carousel.js" % settings.STATIC_URL)
         add_resource(context, "body_end", "%sshuup_carousel/js/vendor/owl.carousel.min.js" % settings.STATIC_URL)
         return super(CarouselPlugin, self).render(context)
 
@@ -72,7 +73,9 @@ class BannerBoxPlugin(CarouselPlugin):
         :param context: current context
         :return: html content for the plugin
         """
-        add_resource(context, "body_end", "%sshuup_carousel/js/script.js" % settings.STATIC_URL)
+        add_resource(context, "head_end", "%sshuup_carousel/css/style.css" % settings.STATIC_URL)
+        add_resource(context, "body_end", "%sshuup_carousel/js/banner_box.js" % settings.STATIC_URL)
+        add_resource(context, "body_end", "%sshuup_carousel/js/vendor/owl.carousel.min.js" % settings.STATIC_URL)
         return super(BannerBoxPlugin, self).render(context)
 
     def get_context_data(self, context):
